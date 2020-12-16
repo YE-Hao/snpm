@@ -3,6 +3,8 @@
 const abbrev = require('abbrev');
 const npm = require('npm');
 const cl = require('npm/lib/config/cmd-list');
+const childProcess = require('child_process');
+const fs = require('fs');
 const aliases = cl.aliases;
 const cmdList = cl.cmdList;
 const plumbing = cl.plumbing;
@@ -13,4 +15,9 @@ const fullList = cmdList.concat(aliasNames).filter(c => plumbing.indexOf(c) === 
 const abbrevs = abbrev(fullList);
 // console.info(fullList)
 // console.info(npm)
-console.info(abbrevs)
+// console.info(abbrevs)
+// console.log(process.argv);
+const pkg = fs.readFileSync('package.json', 'utf-8');
+
+console.log(JSON.parse(pkg));
+childProcess.fork('git',['--version']);
